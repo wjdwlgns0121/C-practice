@@ -59,7 +59,7 @@
 		cppAir.showBaggage();
 	}
 
-접근 지정자자(protected)
+접근 지정자(protected)
 
 	#include <iostream>
 	using namespace std;
