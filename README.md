@@ -1,161 +1,162 @@
-#include <iostream>
-using namespace std;
+가장 기본적인 상속
 
-class Vehicle
-{
-private:
-	int person = 0;    // 탑승인원
-	int baggage;       // 화물 무게
-public:
-	void ride()  // 탑승
+	#include <iostream>
+	using namespace std;
+	
+	class Vehicle
 	{
-		person++;
-	}
-	void load(int weight) { baggage = weight; }   // 짐 싣기
-	void getOff(int person) { person--; }   // 하차
-	int getPerson() { return person; } // 탑승인원 확인
-	void showPerson() { cout << person << endl; }
-	void showBaggage() { cout << baggage << endl; }
-};
-
-class Cruise :public Vehicle
-{
-private:
-	int room;
-public:
-	void setRoom(int room);    // 크루즈의 방 수 설정
-	void countPerson() { cout << Vehicle::getPerson() << endl; }  // 부모클래스 호출
-};
-
-class AirPlane :public Vehicle
-{
-private:
-	int seat;
-public:
-	void setSeat(int seat);    // 자리 수 설정
-	void countPerson()    // 탑승인원 확인
+	private:
+		int person = 0;    // 탑승인원
+		int baggage;       // 화물 무게
+	public:
+		void ride()  // 탑승
+		{
+			person++;
+		}
+		void load(int weight) { baggage = weight; }   // 짐 싣기
+		void getOff(int person) { person--; }   // 하차
+		int getPerson() { return person; } // 탑승인원 확인
+		void showPerson() { cout << person << endl; }
+		void showBaggage() { cout << baggage << endl; }
+	};
+	
+	class Cruise :public Vehicle
 	{
-		cout << Vehicle::getPerson() << endl;     // 부모클래스 호출
-	}
-};
-
-int main(int argc, char const* argv[])
-{
-	Cruise dolphin;
-	dolphin.ride();    // 부모클래스 멤버함수  접근
-	dolphin.load(10);  // 부모클래스 멤버함수  접근
-	dolphin.countPerson();     // 자식클래스 멤버함수 호출
-	dolphin.showPerson();
-	dolphin.showBaggage();
-
-
-	AirPlane cppAir;
-	cppAir.ride();    // 부모클래스의 멤버함수 접근
-	cppAir.load(20);  // 부모클래스 멤버함수  접근 
-	cppAir.countPerson();     // 자식클래스 멤버함수 호출
-	cppAir.showPerson();
-	cppAir.showBaggage();
-}
-
-//별개의 코드(protected)
-class Base {
-private:
-	int pri = 1;
-public:
-	int pub = 2;
-protected:
-	int pro = 3;
-};
-
-class Drived : private Base{
-public:
-	void show() {
-		//cout << pri << endl;
-		cout << pub << endl;
-		cout << pro << endl;
-	}
-};
-
-class Drived2 : protected Base{
-public:
-	void show() {
-		//cout << pri << endl;
-		cout << pub << endl;
-		cout << pro << endl;
-	}
-};
-
-class Drived3 : public Base {
-public:
-	void show() {
-		//cout << pri << endl;
-		cout << pub << endl;
-		cout << pro << endl;
-	}
-};
-
-int main() {
-	Drived priv;
-	Drived2 prot;
-	Drived3 publ;
-
-	priv.show();
-	prot.show();
-	publ.show();
-
-	return 0;
-}
-
-
-
-
-//별개의 코드(단일 상속)
-#include <iostream>
-#include <string>
-using namespace std;
-
-// 부모 클래스 (기반 클래스)
-class Person {
-private:
-
-protected:
-	string name;
-	int age;
-
-public:
-	Person(string n, int a) : name(n), age(a) {}
-
-	void introduce() {
-		cout << "이름: " << name << ", 나이: " << age << endl;
-	}
-	void intro() { introduce(); } 
-};
-
-// 자식 클래스 (파생 클래스)
-class Student : public Person {
-private:
-	string major;
-
-protected:
-	void study() {
-		cout << name << " 학생이 " << major << " 전공 공부 중입니다." << endl;
+	private:
+		int room;
+	public:
+		void setRoom(int room);    // 크루즈의 방 수 설정
+		void countPerson() { cout << Vehicle::getPerson() << endl; }  // 부모클래스 호출
+	};
+	
+	class AirPlane :public Vehicle
+	{
+	private:
+		int seat;
+	public:
+		void setSeat(int seat);    // 자리 수 설정
+		void countPerson()    // 탑승인원 확인
+		{
+			cout << Vehicle::getPerson() << endl;     // 부모클래스 호출
+		}
+	};
+	
+	int main(int argc, char const* argv[])
+	{
+		Cruise dolphin;
+		dolphin.ride();    // 부모클래스 멤버함수  접근
+		dolphin.load(10);  // 부모클래스 멤버함수  접근
+		dolphin.countPerson();     // 자식클래스 멤버함수 호출
+		dolphin.showPerson();
+		dolphin.showBaggage();
+	
+	
+		AirPlane cppAir;
+		cppAir.ride();    // 부모클래스의 멤버함수 접근
+		cppAir.load(20);  // 부모클래스 멤버함수  접근 
+		cppAir.countPerson();     // 자식클래스 멤버함수 호출
+		cppAir.showPerson();
+		cppAir.showBaggage();
 	}
 
-public:
-	Student(string n, int a, string m) : Person(n, a), major(m) {}
-	//void introCall() { introduce(); }
-};
+접근 지정자자(protected)
 
-int main() {
-	Student s("홍길동", 21, "컴퓨터공학");
-	//s.introduce();   // 부모 클래스 함수 사용(상속할 때 접근 지정자가 protected/private일 떄 접근 불가)
-	//s.intro();	// 부모 클래스의 introduce의 접근 지정자가 protected/private여도 접근 가능
-				// 자식 클래스가 상속할 때 접근 지정자가 protected/privat일 때 접근 불가
-	//s.study();		// 자식 클래스 함수 사용(접근 지정자가 protected/private일 때 접근 불가)
-	//s.introCall(); //부모 클래스의 introduce의 접근 지정자에 상관없이 접근 가능
+	class Base {
+	private:
+		int pri = 1;
+	public:
+		int pub = 2;
+	protected:
+		int pro = 3;
+	};
+	
+	class Drived : private Base{
+	public:
+		void show() {
+			//cout << pri << endl;
+			cout << pub << endl;
+			cout << pro << endl;
+		}
+	};
+	
+	class Drived2 : protected Base{
+	public:
+		void show() {
+			//cout << pri << endl;
+			cout << pub << endl;
+			cout << pro << endl;
+		}
+	};
+	
+	class Drived3 : public Base {
+	public:
+		void show() {
+			//cout << pri << endl;
+			cout << pub << endl;
+			cout << pro << endl;
+		}
+	};
+	
+	int main() {
+		Drived priv;
+		Drived2 prot;
+		Drived3 publ;
+	
+		priv.show();
+		prot.show();
+		publ.show();
+	
+		return 0;
+	}
 
-	return 0;
-}
+단일 상속
+
+	#include <iostream>
+	#include <string>
+	using namespace std;
+	
+	// 부모 클래스 (기반 클래스)
+	class Person {
+	private:
+	
+	protected:
+		string name;
+		int age;
+	
+	public:
+		Person(string n, int a) : name(n), age(a) {}
+	
+		void introduce() {
+			cout << "이름: " << name << ", 나이: " << age << endl;
+		}
+		void intro() { introduce(); } 
+	};
+	
+	// 자식 클래스 (파생 클래스)
+	class Student : public Person {
+	private:
+		string major;
+	
+	protected:
+		void study() {
+			cout << name << " 학생이 " << major << " 전공 공부 중입니다." << endl;
+		}
+	
+	public:
+		Student(string n, int a, string m) : Person(n, a), major(m) {}
+		//void introCall() { introduce(); }
+	};
+	
+	int main() {
+		Student s("홍길동", 21, "컴퓨터공학");
+		//s.introduce();   // 부모 클래스 함수 사용(상속할 때 접근 지정자가 protected/private일 떄 접근 불가)
+		//s.intro();	// 부모 클래스의 introduce의 접근 지정자가 protected/private여도 접근 가능
+					// 자식 클래스가 상속할 때 접근 지정자가 protected/privat일 때 접근 불가
+		//s.study();		// 자식 클래스 함수 사용(접근 지정자가 protected/private일 때 접근 불가)
+		//s.introCall(); //부모 클래스의 introduce의 접근 지정자에 상관없이 접근 가능
+	
+		return 0;
+	}
 
 
 
