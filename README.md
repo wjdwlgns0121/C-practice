@@ -1,6 +1,6 @@
 #include <iostream>
 using namespace std;
-/*
+
 class Vehicle
 {
 private:
@@ -105,10 +105,10 @@ int main() {
 
 	return 0;
 }
-*/
 
 
-/*
+
+
 //별개의 코드(단일 상속)
 #include <iostream>
 #include <string>
@@ -156,11 +156,11 @@ int main() {
 
 	return 0;
 }
-*/
 
 
-/*
-//별개의 코드(다중 상속) 정리 필요
+
+
+//별개의 코드(다중 상속)
 #include <iostream>
 using namespace std;
 
@@ -213,10 +213,10 @@ int main() {
 
 	return 0;
 }
-*/
 
 
-/*
+
+
 //별개의 코드(오버라이딩, 시스템상 각 class의 speak의 저장공간이 다름)
 #include <iostream>
 using namespace std;
@@ -264,4 +264,4 @@ int main() {
 
 	return 0;
 }
-*/
+
